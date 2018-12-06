@@ -1,6 +1,9 @@
 [submodule "TesseractOCR/tesseract-ocr"]
 	path = TesseractOCR/tesseract-ocr
-	url = https://github.com/tesseract-ocr/tesseract.git
+url=https://github.com/whitehobbit/tesseract.git
 [submodule "TesseractOCR/libtiff-ios"]
 	path = TesseractOCR/libtiff-ios
-	url = https://github.com/ashtons/libtiff-ios.git
+url=https://github.com/whitehobbit/libtiff-ios.git
+[submodule "TesseractOCR/leptonica-iOS"]
+	path = TesseractOCR/leptonica-iOS
+	url = https://github.com/whitehobbit/Leptonica-iOS
