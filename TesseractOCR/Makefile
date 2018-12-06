@@ -1,13 +1,13 @@
-LEPTON_NAME = leptonica-1.72
-PNG_NAME    = libpng-1.6.20
-JPEG_NAME   = jpeg-9a
-TIFF_NAME   = tiff-4.0.4
+LEPTON_NAME = leptonica-iOS
+PNG_NAME    = libpng-1.6.35
+JPEG_NAME   = jpeg-9c
+TIFF_NAME   = tiff-4.0.10
 
 SDK_IPHONEOS_PATH=$(shell xcrun --sdk iphoneos --show-sdk-path)
 SDK_IPHONESIMULATOR_PATH=$(shell xcrun --sdk iphonesimulator --show-sdk-path)
 XCODE_DEVELOPER_PATH=/Applications/Xcode.app/Contents/Developer
 XCODETOOLCHAIN_PATH=$(XCODE_DEVELOPER_PATH)/Toolchains/XcodeDefault.xctoolchain
-IOS_DEPLOY_TGT="7.0"
+IOS_DEPLOY_TGT="11.0"
 
 TESSERACT_SRC = $(shell pwd)/tesseract-ocr
 LEPTON_SRC = $(shell pwd)/$(LEPTON_NAME)
@@ -29,9 +29,9 @@ libpngfiles = libpng.a
 libjpegfiles = libjpeg.a
 libtifffiles = libtiff.a
 
-sdks = $(SDK_IPHONEOS_PATH) $(SDK_IPHONEOS_PATH) $(SDK_IPHONEOS_PATH) $(SDK_IPHONESIMULATOR_PATH) $(SDK_IPHONESIMULATOR_PATH)
-archs_all = armv7 armv7s arm64 i386 x86_64
-arch_names_all = arm-apple-darwin7 arm-apple-darwin7s arm-apple-darwin64 i386-apple-darwin x86_64-apple-darwin
+sdks = $(SDK_IPHONEOS_PATH) $(SDK_IPHONEOS_PATH) $(SDK_IPHONESIMULATOR_PATH)
+archs_all = arm64 arm64e x86_64
+arch_names_all = arm-apple-darwin64 arm-apple-darwin64e x86_64-apple-darwin
 arch_names = $(foreach arch, $(ARCHS), $(call swap, $(arch), $(archs_all), $(arch_names_all) ) )
 ARCHS ?= $(archs_all)
 
@@ -140,14 +140,14 @@ $(images) : $(imagesmakefile) FORCE
 #######################
 # Download dependencies
 #######################
-$(imagesmakefile) $(libtessautogen) :
+$(imagesmakefile) $(libtessautogen) $(libleptconfig) :
 	git submodule init
 	git submodule update
 
-$(libleptconfig) :
-	curl http://leptonica.org/source/$(LEPTON_NAME).tar.gz | tar -xpf-
-	cd $(LEPTON_NAME) ; \
-	patch -p1 < ../leptonica.patch
+# $(libleptconfig) :
+# 	curl http://leptonica.org/source/$(LEPTON_NAME).tar.gz | tar -xpf-
+# 	cd $(LEPTON_NAME) ; \
+# 	patch -p1 < ../leptonica.patch
 
 #######################
 # Clean
